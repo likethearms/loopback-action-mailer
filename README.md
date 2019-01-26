@@ -7,7 +7,7 @@ INSTALL
 =============
 
 ```bash
-  npm i loopback-action-mailer --S
+  npm i loopback-action-mailer -S
 ```
 
 USAGE
