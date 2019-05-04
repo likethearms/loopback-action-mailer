@@ -1,5 +1,4 @@
-import * as ejs from 'ejs';
-import * as path from 'path';
+const ejs = require('ejs');
 
 interface ITemplateData {
   signature: string;
@@ -19,7 +18,7 @@ interface IEmailConfig {
 module.exports = (Model, emailConfig: IEmailConfig) => {
   const { Email } = Model.app.models;
   return new Promise((resolve, reject) => {
-    const tempPath = emailConfig.templatePath || path.resolve(__dirname, './emails/action-email.ejs');
+    const tempPath = emailConfig.templatePath || require.resolve('simple-transaction-email-ejs/simple-email.ejs');
     ejs.renderFile(tempPath, { ...emailConfig.templateData, url: emailConfig.redirect }, (ejsError, str) => {
       if (ejsError) return reject(ejsError);
       return Email.send({
