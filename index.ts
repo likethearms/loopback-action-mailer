@@ -22,9 +22,7 @@ module.exports = (Model, emailConfig: IEmailConfig) => {
     ejs.renderFile(tempPath, { ...emailConfig.templateData, url: emailConfig.redirect }, (ejsError, str) => {
       if (ejsError) return reject(ejsError);
       return Email.send({
-        from: emailConfig.from,
-        to: emailConfig.to,
-        subject: emailConfig.subject,
+        ...emailConfig,
         html: str,
       }, (err) => {
         if (err) return reject(`MailError: InvitationMail: ${err.message}`);
